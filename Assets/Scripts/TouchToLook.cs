@@ -19,18 +19,14 @@ public class TouchToLook : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            // get the world position of the mouse
-            mousePos = mainCamera.ScreenToWorldPoint( new Vector3(Input.mousePosition.x, Input.mousePosition.y, _MouseZDist) );
+    public void Look() {
+        // get the world position of the mouse
+        mousePos = mainCamera.ScreenToWorldPoint( new Vector3(Input.mousePosition.x, Input.mousePosition.y, _MouseZDist) );
 
-            // determine the target rotation
-            Quaternion targetRot = Quaternion.LookRotation(mousePos - localTrans.position);
+        // determine the target rotation
+        Quaternion targetRot = Quaternion.LookRotation(mousePos - localTrans.position);
 
-            // smoothly rotate towards the target point.
-            localTrans.rotation = Quaternion.Slerp(localTrans.rotation, targetRot, _rotateSpeed * Time.deltaTime);
-        }
+        // smoothly rotate towards the target point.
+        localTrans.rotation = Quaternion.Slerp(localTrans.rotation, targetRot, _rotateSpeed * Time.deltaTime);
     }
 }
